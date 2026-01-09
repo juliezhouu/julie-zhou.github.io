@@ -2468,3 +2468,269 @@ button.filter-button:hover {
 .gallery-item.tall img {
   height: 450px;
 }
+
+/* ============================================
+   ENHANCED MOBILE RESPONSIVE STYLES
+   ============================================ */
+
+/* Mobile improvements for screens 768px and below */
+@media only screen and (max-width: 768px) {
+  /* Header adjustments */
+  #header {
+    height: var(--header-height-min);
+  }
+  
+  .header-wrap {
+    padding: 12px 16px;
+  }
+  
+  .site-logo {
+    font-size: 20px !important;
+  }
+  
+  /* Main hero section improvements */
+  #billboard.aurora-split-hero {
+    padding-top: 100px;
+    padding-bottom: 30px;
+  }
+  
+  #billboard.aurora-split-hero .container-lg {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  /* Stack columns vertically on mobile */
+  #billboard.aurora-split-hero .row {
+    flex-direction: column;
+  }
+  
+  /* Left panel - make it smaller and more compact */
+  #billboard.aurora-split-hero .aj-left {
+    min-height: 300px;
+    margin-bottom: 20px;
+    padding: 12px;
+  }
+  
+  /* Mini navigation - make it wrap and stack */
+  #billboard.aurora-split-hero .aj-mini-nav {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 8px 4px;
+  }
+  
+  #billboard.aurora-split-hero .aj-mini-nav a {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+  
+  #billboard.aurora-split-hero .aj-mini-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  /* Cloud button */
+  #billboard.aurora-split-hero .aj-cloud {
+    width: 50px;
+    height: 50px;
+    left: 12px;
+    top: 70px;
+  }
+  
+  #billboard.aurora-split-hero .aj-cloud svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Illustration */
+  #billboard.aurora-split-hero .aj-illu {
+    width: 280px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -20px;
+  }
+  
+  /* Stars */
+  #billboard.aurora-split-hero .aj-stars {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    top: 80px;
+  }
+  
+  /* Right card improvements */
+  #billboard.aurora-split-hero .aj-card {
+    min-height: auto;
+    margin-top: 20px;
+  }
+  
+  #billboard.aurora-split-hero .aj-card-head {
+    height: 160px;
+  }
+  
+  /* Name/title */
+  #billboard.aurora-split-hero .aj-name {
+    top: 20px;
+  }
+  
+  #billboard.aurora-split-hero .aj-name-img {
+    height: 90px;
+  }
+  
+  /* Card body */
+  #billboard.aurora-split-hero .aj-card-body {
+    padding: 16px 20px 20px 20px;
+  }
+  
+  /* Biography title */
+  #billboard.aurora-split-hero .aj-title {
+    font-size: 26px;
+  }
+  
+  /* Bio text */
+  #billboard.aurora-split-hero .aj-bio {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  #billboard.aurora-split-hero .aj-bio-text {
+    height: auto;
+    max-height: 200px;
+    font-size: 14px;
+    line-height: 1.5;
+    padding-right: 8px;
+  }
+  
+  #billboard.aurora-split-hero .aj-rail {
+    display: none;
+  }
+  
+  /* Tiles - make them stack vertically */
+  #billboard.aurora-split-hero .aj-tiles {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  #billboard.aurora-split-hero .aj-tile {
+    height: 60px;
+    font-size: 15px;
+  }
+  
+  /* Hide protruding tab on mobile */
+  #billboard.aurora-split-hero .aj-card::before {
+    display: none;
+  }
+  
+  /* Footer adjustments */
+  #footer-bottom {
+    padding: 16px 0;
+  }
+  
+  #footer-bottom .row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .social-links ul {
+    justify-content: center !important;
+    gap: 12px;
+  }
+  
+  .copyright {
+    text-align: center !important;
+  }
+  
+  /* Gallery modal improvements */
+  .gallery-modal-content {
+    width: 95%;
+    max-height: 90vh;
+    margin: 20px;
+  }
+  
+  .gallery-modal-header {
+    padding: 12px;
+  }
+  
+  .gallery-modal-header h2 {
+    font-size: 20px;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .gallery-item img,
+  .gallery-item.tall img {
+    height: 250px;
+  }
+}
+
+/* Extra small screens - 480px and below */
+@media only screen and (max-width: 480px) {
+  #billboard.aurora-split-hero {
+    padding-top: 90px;
+  }
+  
+  #billboard.aurora-split-hero .aj-left {
+    min-height: 250px;
+    padding: 8px;
+  }
+  
+  #billboard.aurora-split-hero .aj-mini-nav {
+    gap: 8px;
+  }
+  
+  #billboard.aurora-split-hero .aj-mini-nav a {
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+  
+  #billboard.aurora-split-hero .aj-mini-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  #billboard.aurora-split-hero .aj-illu {
+    width: 220px;
+  }
+  
+  #billboard.aurora-split-hero .aj-stars {
+    width: 110px;
+    top: 70px;
+  }
+  
+  #billboard.aurora-split-hero .aj-cloud {
+    width: 44px;
+    height: 44px;
+    top: 60px;
+  }
+  
+  #billboard.aurora-split-hero .aj-name-img {
+    height: 70px;
+  }
+  
+  #billboard.aurora-split-hero .aj-title {
+    font-size: 22px;
+  }
+  
+  #billboard.aurora-split-hero .aj-bio-text {
+    font-size: 13px;
+    max-height: 180px;
+  }
+  
+  #billboard.aurora-split-hero .aj-tile {
+    height: 52px;
+    font-size: 14px;
+  }
+  
+  #billboard.aurora-split-hero .aj-card-body {
+    padding: 12px 16px 16px 16px;
+  }
+  
+  .site-logo {
+    font-size: 18px !important;
+  }
+}
