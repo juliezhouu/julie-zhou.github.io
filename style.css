@@ -1200,11 +1200,29 @@ body.nav-active .nav__list-item:nth-child(10) {
 
 /*----- 6.8 Post Grid Section
 --------------------------------------------------------------*/
+#post-grid .row {
+  display: flex;
+  flex-wrap: nowrap !important;
+  gap: 15px;
+}
+
+#post-grid .row > div {
+  flex: 0 0 calc(33.333% - 10px);
+  max-width: calc(33.333% - 10px);
+}
+
 #post-grid .post-item {
   overflow: hidden;
   position: relative;
   cursor: pointer;
   margin-bottom: 40px;
+}
+
+#post-grid .post-item img {
+  width: 100%;
+  aspect-ratio: 1 / 1.5;
+  object-fit: cover;
+  display: block;
 }
 
 #post-grid .post-item:last-child {
