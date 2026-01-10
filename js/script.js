@@ -119,9 +119,9 @@
 		});
 	}
 
-		function initIsotope() {
-		// Initialize Isotope
-		var $container = $('.isotope-container').isotope({
+function initIsotope() {
+	// Initialize Isotope
+	var $container = $('.isotope-container').isotope({
 			itemSelector: '.item',
 			layoutMode: 'masonry'
 		});
@@ -160,7 +160,10 @@
 				modalHeader && (modalHeader.style.touchAction = 'none');
 
 				modalHeader && modalHeader.addEventListener('pointerdown', function(ev) {
-					ev.preventDefault();
+				// Don't start dragging if clicking the close button
+				if (ev.target.id === 'ajModalClose' || ev.target.classList.contains('aj-modal-close') || ev.target.closest('.aj-modal-close')) {
+					return;
+				}
 					dragging = true;
 					try { modal.setPointerCapture(ev.pointerId); } catch (e) {}
 					const rect = modal.getBoundingClientRect();
@@ -239,38 +242,26 @@
 				});
 			});
 		})();
+}
 
-        // Active button class management
-        $('.filter-button').on('click', function () {
-            $('.filter-button').removeClass('active');
-            $(this).addClass('active');
-            
-            var filterValue = $(this).attr('data-filter');
-            $container.isotope({ filter: filterValue });
-        });
-    }
+$(document).ready(function () {
+	overlayMenu();
 
-    $(document).ready(function () {
-        overlayMenu();
-        initChocolat();
-        initJarallax();
-        initSwiper();
+	AOS.init({
+		duration: 1500,
+		once: true,
+		offset: 20
+	});
 
-		AOS.init({
-			duration: 1500,
-			once: true,
-			offset: 20
-		});
+	// Prevent browser from restoring previous scroll position on navigation
+	try {
+		if ('scrollRestoration' in history) {
+			history.scrollRestoration = 'manual';
+		}
+	} catch (e) { /* ignore in older browsers */ }
 
-		// Prevent browser from restoring previous scroll position on navigation
-		try {
-			if ('scrollRestoration' in history) {
-				history.scrollRestoration = 'manual';
-			}
-		} catch (e) { /* ignore in older browsers */ }
-
-        // Initialize isotope after all images are loaded
-        $(window).on('load', function() {
+	// Initialize isotope after all images are loaded
+	$(window).on('load', function() {
 			
 			// Fade out preloader
             $("#overlayer").fadeOut("slow");
@@ -326,7 +317,10 @@
 				modalHeader.style.touchAction = 'none';
 				let dragging = false, offsetX = 0, offsetY = 0;
 				modalHeader.addEventListener('pointerdown', function(ev) {
-					ev.preventDefault();
+				// Don't start dragging if clicking the close button
+				if (ev.target.id === 'ajModalClose' || ev.target.classList.contains('aj-modal-close') || ev.target.closest('.aj-modal-close')) {
+					return;
+				}
 					dragging = true;
 					try { modal.setPointerCapture(ev.pointerId); } catch (e) {}
 					const rect = modal.getBoundingClientRect();
@@ -487,66 +481,25 @@
 				btn.addEventListener('click', function(e){ e.preventDefault(); openContactModal(); });
 			});
 		})();
-    });
-
+});
 
 })(jQuery);
 
-// Global click handler as a safety-net: close modal when any close button is clicked
+// Global handler to ensure modal close button always works
 document.addEventListener('click', function(e) {
-	try {
-		var target = e.target;
-		if (!target) return;
-		// matches the close button by id or class
-		if (target.id === 'ajModalClose' || (target.closest && (target.closest('#ajModalClose') || target.closest('.aj-modal-close')))) {
-			var m = document.getElementById('ajModal');
-			if (m) {
-				m.style.display = 'none';
-				m.setAttribute('aria-hidden', 'true');
+	// Check if the clicked element or any parent is the close button
+	let target = e.target;
+	while (target && target !== document) {
+		if (target.id === 'ajModalClose' || target.classList.contains('aj-modal-close')) {
+			e.preventDefault();
+			e.stopPropagation();
+			const modal = document.getElementById('ajModal');
+			if (modal) {
+				modal.style.display = 'none';
+				modal.setAttribute('aria-hidden', 'true');
 			}
+			return;
 		}
-	} catch (err) { /* ignore */ }
-});
-
-// Also attach a direct handler after DOMContentLoaded to ensure the close button always works
-document.addEventListener('DOMContentLoaded', function() {
-	try {
-		var closeBtn = document.getElementById('ajModalClose');
-		if (!closeBtn) return;
-		closeBtn.addEventListener('click', function(ev) {
-			ev.preventDefault();
-			var m = document.getElementById('ajModal');
-			if (m) {
-				m.style.display = 'none';
-				m.setAttribute('aria-hidden', 'true');
-			}
-		});
-		// also support pointerup/touchend as a fallback
-		closeBtn.addEventListener('pointerup', function(ev) {
-			ev.preventDefault();
-			var m = document.getElementById('ajModal');
-			if (m) {
-				m.style.display = 'none';
-				m.setAttribute('aria-hidden', 'true');
-			}
-		});
-	} catch (err) { /* ignore */ }
-});
-
-// Extra capturing listener to ensure clicks/taps on the close button are caught early
-['click','pointerup','touchend','pointerdown'].forEach(function(evtName){
-	document.addEventListener(evtName, function(e){
-		try {
-			var t = e.target;
-			if (!t) return;
-			if (t.id === 'ajModalClose' || (t.closest && (t.closest('#ajModalClose') || t.closest('.aj-modal-close')))) {
-				console && console.log && console.log('[ajModal] close triggered by', evtName);
-				var m = document.getElementById('ajModal');
-				if (m) {
-					m.style.display = 'none';
-					m.setAttribute('aria-hidden', 'true');
-				}
-			}
-		} catch (err) { /* ignore */ }
-	}, true); /* use capture */
-});
+		target = target.parentElement;
+	}
+}, true); // Use capture phase to catch events early

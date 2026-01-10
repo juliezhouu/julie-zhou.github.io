@@ -1817,32 +1817,37 @@ button.filter-button:hover {
   filter: drop-shadow(0 10px 10px rgba(255, 214, 122, 0.35));
 }
 
-/* Twinkle animation for stars: subtle scale and brightness pulse */
+/* Floating + Twinkle animation for stars: smooth movement with scale and brightness */
 #billboard.aurora-split-hero .aj-stars {
   will-change: transform, filter, opacity;
-  animation: aj-twinkle 3.6s ease-in-out infinite;
+  animation: aj-float 4s ease-in-out infinite;
   animation-delay: 0.2s;
   transform-origin: center center;
 }
 
-@keyframes aj-twinkle {
+@keyframes aj-float {
   0% {
-    transform: scale(1);
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
     filter: brightness(1) saturate(1);
     opacity: 0.92;
   }
-  30% {
-    transform: scale(1.08);
+  25% {
+    transform: translateY(-15px) translateX(5px) rotate(2deg) scale(1.05);
+    filter: brightness(1.35) saturate(1.08);
+    opacity: 0.98;
+  }
+  50% {
+    transform: translateY(-20px) translateX(0px) rotate(0deg) scale(1.08);
     filter: brightness(1.45) saturate(1.1);
     opacity: 1;
   }
-  55% {
-    transform: scale(0.97);
-    filter: brightness(1.05) saturate(0.98);
-    opacity: 0.94;
+  75% {
+    transform: translateY(-15px) translateX(-5px) rotate(-2deg) scale(1.05);
+    filter: brightness(1.35) saturate(1.08);
+    opacity: 0.98;
   }
   100% {
-    transform: scale(1);
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
     filter: brightness(1) saturate(1);
     opacity: 0.92;
   }
