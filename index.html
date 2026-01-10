@@ -92,7 +92,6 @@
 
 		  <img class="aj-stars" src="images/stars.png" alt="decorative stars">
 
-					<!-- replace image with your illustration -->
 					<img class="aj-illu" src="images/banner-pic.png" alt="Illustration" data-aos="zoom-in" data-aos-delay="300">
         </div>
       </div>
@@ -678,7 +677,6 @@
   </div>
 
   <div class="aj-modal-body" id="ajModalBody">
-    <!-- content injected by JS -->
   </div>
 </div>
 
@@ -728,7 +726,6 @@
 
 <!-- Illustrations Gallery Script -->
 <script>
-  // Gallery modal functionality
   document.addEventListener('DOMContentLoaded', function() {
     const illustrationsBtn = document.querySelector('.aj-tile[aria-label="illustrations"]');
     const galleryModal = document.getElementById('galleryModal');
@@ -745,7 +742,7 @@
         document.body.style.overflow = 'auto';
       });
       
-      // Close when clicking outside the modal content
+      // close when clicking outside the modal content
       galleryModal.addEventListener('click', function(e) {
         if (e.target === galleryModal) {
           galleryModal.style.display = 'none';
