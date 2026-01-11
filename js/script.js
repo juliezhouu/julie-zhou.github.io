@@ -217,7 +217,7 @@ function initIsotope() {
 							</div>
 							<div style="margin-bottom: 20px;">
 								<p style="font-weight: 600; margin-bottom: 8px; color: #555;">Q: What roles are you looking for?</p>
-								<p style="margin-left: 16px; color: #666;">A: Software engineering and product or UI/UX roles. I like working on things where code and design come together and the end result actually feels good to use.</p>
+								<p style="margin-left: 16px; color: #666;">A: Software engineering, product or UI/UX, and data analysis roles. I enjoy building systems that collect and interpret data, then turning that into interfaces people can actually understand and use.</p>
 							</div>
 							<div style="margin-bottom: 20px;">
 								<p style="font-weight: 600; margin-bottom: 8px; color: #555;">Q: Do you work with data and machine learning?</p>
@@ -506,6 +506,11 @@ document.addEventListener('click', function(e) {
 
 // Click effect - show image at click position
 document.addEventListener('click', function(e) {
+	// Check if click effects are disabled globally
+	if (document.body.classList.contains('no-click-effects')) {
+		return;
+	}
+	
 	// Check if click is within the biography card or footer
 	const ajCard = e.target.closest('.aj-card');
 	const footer = e.target.closest('#footer');
