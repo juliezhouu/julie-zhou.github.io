@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PosturePal Demo - Julie Zhou</title>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link rel="stylesheet" type="text/css" href="assets/icomoon/icomoon.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/vendor.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+		rel="stylesheet">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background: #FAFBFF;
+			min-height: 100vh;
+			position: relative;
+			overflow-x: hidden;
+			font-family: var(--body-font);
+		}
+
+		#header {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(10px);
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 1000;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		}
+
+		.demo-section {
+			padding: 140px 20px 80px;
+			min-height: 100vh;
+			position: relative;
+			z-index: 1;
+		}
+
+		.demo-container {
+			max-width: 1100px;
+			margin: 0 auto;
+			width: 100%;
+		}
+
+		/* Project Header */
+		.project-header {
+			margin-bottom: 60px;
+			animation: fadeInDown 0.6s ease-out;
+		}
+
+		.breadcrumb {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin-bottom: 30px;
+			font-size: 0.95rem;
+		}
+
+		.breadcrumb a {
+			color: #7C3AED;
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+
+		.breadcrumb a:hover {
+			color: #5B21B6;
+		}
+
+		.breadcrumb span {
+			color: #9CA3AF;
+		}
+
+		.project-title {
+			margin-bottom: 20px;
+		}
+
+		.project-title h1 {
+			color: #1F2937;
+			font-family: var(--heading-font);
+			font-size: 3rem;
+			font-weight: 800;
+			letter-spacing: -0.5px;
+			margin-bottom: 15px;
+			line-height: 1.2;
+		}
+
+		.project-subtitle {
+			color: #6B7280;
+			font-size: 1.25rem;
+			line-height: 1.6;
+			max-width: 700px;
+		}
+
+		/* Project Meta */
+		.project-meta {
+			display: flex;
+			gap: 40px;
+			flex-wrap: wrap;
+			margin-top: 30px;
+			padding: 25px 0;
+			border-top: 1px solid #E5E7EB;
+			border-bottom: 1px solid #E5E7EB;
+		}
+
+		.meta-item {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+		}
+
+		.meta-label {
+			font-size: 0.85rem;
+			color: #9CA3AF;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			font-weight: 600;
+		}
+
+		.meta-value {
+			color: #1F2937;
+			font-size: 1rem;
+			font-weight: 600;
+		}
+
+		.tech-tags {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.tag {
+			background: #F3F4F6;
+			color: #6B7280;
+			padding: 5px 12px;
+			border-radius: 6px;
+			font-size: 0.9rem;
+			font-weight: 500;
+		}
+
+		/* Video Section */
+		.video-section {
+			margin-bottom: 50px;
+			animation: fadeInUp 0.6s ease-out 0.1s both;
+		}
+
+		.section-title {
+			font-size: 1.5rem;
+			color: #1F2937;
+			font-weight: 700;
+			margin-bottom: 20px;
+			font-family: var(--heading-font);
+		}
+
+		.video-wrapper {
+			background: #ffffff;
+			border-radius: 16px;
+			padding: 20px;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+			transition: all 0.3s ease;
+		}
+
+		.video-wrapper:hover {
+			box-shadow: 0 8px 30px rgba(124, 58, 237, 0.12);
+		}
+
+		video {
+			width: 100%;
+			height: auto;
+			display: block;
+			border-radius: 12px;
+			background: #000;
+			pointer-events: none;
+		}
+
+		video::-webkit-media-controls {
+			display: none !important;
+		}
+
+		video::-webkit-media-controls-enclosure {
+			display: none !important;
+		}
+
+		/* Project Description */
+		.project-description {
+			animation: fadeInUp 0.6s ease-out 0.2s both;
+			margin-top: 50px;
+		}
+
+		.description-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 30px;
+			margin-top: 25px;
+		}
+
+		.description-card {
+			background: #ffffff;
+			padding: 30px;
+			border-radius: 12px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+			transition: all 0.3s ease;
+		}
+
+		.description-card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 8px 25px rgba(124, 58, 237, 0.1);
+		}
+
+		.card-icon {
+			font-size: 2rem;
+			margin-bottom: 15px;
+		}
+
+		.card-title {
+			font-size: 1.15rem;
+			color: #1F2937;
+			font-weight: 700;
+			margin-bottom: 10px;
+			font-family: var(--heading-font);
+		}
+
+		.card-text {
+			color: #6B7280;
+			line-height: 1.6;
+			font-size: 0.95rem;
+		}
+
+		/* GitHub Button */
+		.github-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: #1F2937;
+			color: #ffffff;
+			padding: 12px 24px;
+			border-radius: 8px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.95rem;
+			transition: all 0.3s ease;
+			margin-top: 20px;
+		}
+
+		.github-btn:hover {
+			background: #7C3AED;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+			color: #ffffff;
+		}
+
+		.github-btn svg {
+			width: 20px;
+			height: 20px;
+			fill: currentColor;
+		}
+
+		/* Animations */
+		@keyframes fadeInDown {
+			from {
+				opacity: 0;
+				transform: translateY(-20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.demo-section {
+				padding: 120px 15px 60px;
+			}
+
+			.project-title h1 {
+				font-size: 2.2rem;
+			}
+
+			.project-subtitle {
+				font-size: 1.1rem;
+			}
+
+			.project-meta {
+				gap: 25px;
+			}
+
+			.description-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="overlayer">
+		<span class="loader">
+			<span class="loader-inner"></span>
+		</span>
+	</div>
+
+	<header id="header">
+		<div class="header-wrap">
+			<div class="main-logo">
+				<a href="index.html" class="site-logo" aria-label="Home">Julie Zhou</a>
+			</div>
+		</div>
+	</header>
+
+	<section class="demo-section">
+		<div class="demo-container">
+			<!-- Project Header -->
+			<div class="project-header">
+				<div class="breadcrumb">
+					<a href="index.html">Portfolio</a>
+					<span>/</span>
+					<span>PosturePal</span>
+				</div>
+				
+				<div class="project-title">
+					<h1>PosturePal</h1>
+					<p class="project-subtitle">An AI-powered posture monitoring application that helps users maintain healthy body alignment during computer work through real-time pose detection and feedback.</p>
+					<a href="https://github.com/juliezhouu/posturepal_.git" target="_blank" rel="noopener noreferrer" class="github-btn">
+						<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+						</svg>
+						View on GitHub
+					</a>
+				</div>
+
+				<div class="project-meta">
+					<div class="meta-item">
+						<span class="meta-label">Role</span>
+						<span class="meta-value">Developer & Designer</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Year</span>
+						<span class="meta-value">2025</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Technologies</span>
+						<div class="tech-tags">
+							<span class="tag">Python</span>
+							<span class="tag">MediaPipe</span>
+							<span class="tag">OpenCV</span>
+							<span class="tag">Computer Vision</span>
+							<span class="tag">Machine Learning</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Video Demo -->
+			<div class="video-section">
+				<h2 class="section-title">Demo Video</h2>
+				<div class="video-wrapper">
+					<video id="demoVideo" autoplay loop playsinline preload="auto">
+						<source src="images/video2.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+
+			<!-- Project Description -->
+			<div class="project-description">
+				<h2 class="section-title">Project Overview</h2>
+				<div class="description-grid">
+					<div class="description-card">
+						<div class="card-icon">🧍</div>
+						<h3 class="card-title">Real-Time Pose Detection</h3>
+						<p class="card-text">Advanced computer vision algorithms that continuously monitor body alignment and detect posture deviations in real-time using your webcam.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">💡</div>
+						<h3 class="card-title">Smart Feedback System</h3>
+						<p class="card-text">Intelligent alerts and visual cues that guide you toward better posture without being intrusive to your workflow.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">📊</div>
+						<h3 class="card-title">Health Analytics</h3>
+						<p class="card-text">Track your posture patterns over time with detailed analytics to understand your habits and monitor improvements.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Technical Features -->
+			<div class="project-description" style="margin-top: 60px;">
+				<h2 class="section-title">Technical Highlights</h2>
+				<div class="description-grid">
+					<div class="description-card">
+						<div class="card-icon">🤖</div>
+						<h3 class="card-title">AI Pose Estimation</h3>
+						<p class="card-text">Leveraging MediaPipe's state-of-the-art machine learning models to accurately track 33 body landmarks and analyze skeletal structure in real-time.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">📐</div>
+						<h3 class="card-title">Angle Analysis</h3>
+						<p class="card-text">Mathematical algorithms calculate critical angles between body joints to detect slouching, forward head posture, and shoulder misalignment with precision.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">🎥</div>
+						<h3 class="card-title">Computer Vision Pipeline</h3>
+						<p class="card-text">Optimized OpenCV processing pipeline with efficient frame capture, preprocessing, and rendering to maintain smooth performance on standard hardware.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">⚙️</div>
+						<h3 class="card-title">Customizable Thresholds</h3>
+						<p class="card-text">Adjustable sensitivity settings allow users to personalize the detection parameters based on their individual body type and comfort preferences.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">🔔</div>
+						<h3 class="card-title">Notification System</h3>
+						<p class="card-text">Multi-modal alert system with visual overlays, desktop notifications, and optional audio cues to remind users about posture corrections.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">💾</div>
+						<h3 class="card-title">Data Persistence</h3>
+						<p class="card-text">Session tracking and historical data storage enabling longitudinal analysis of posture habits and health trends over days and weeks.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Challenges & Solutions -->
+			<div class="project-description" style="margin-top: 60px;">
+				<h2 class="section-title">Development Challenges</h2>
+				<div class="description-grid">
+					<div class="description-card">
+						<div class="card-icon">⚠️</div>
+						<h3 class="card-title">False Alert Management</h3>
+						<p class="card-text">Initial detection system triggered excessive false positives when users made natural movements or leaned forward intentionally. Implemented a time-based threshold system with consecutive frame validation to distinguish between momentary position changes and sustained poor posture.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">🔍</div>
+						<h3 class="card-title">Lighting Variability</h3>
+						<p class="card-text">Pose detection accuracy degraded significantly in low-light or backlit conditions. Developed adaptive preprocessing filters and confidence score thresholds that adjust based on ambient lighting conditions to maintain reliable tracking.</p>
+					</div>
+					<div class="description-card">
+						<div class="card-icon">⚡</div>
+						<h3 class="card-title">Performance Optimization</h3>
+						<p class="card-text">Early versions experienced frame rate drops on lower-end hardware. Resolved through strategic frame skipping, model complexity reduction, and implementing efficient caching mechanisms to maintain 30 FPS on standard laptops.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/script.js"></script>
+	
+	<script>
+		// Disable click popup effect on this page
+		document.body.classList.add('no-click-effects');
+		
+		// Force video to play with volume
+		document.addEventListener('DOMContentLoaded', function() {
+			const video = document.getElementById('demoVideo');
+			if (video) {
+				// Try to play with sound first
+				video.muted = false;
+				video.play().catch(function(error) {
+					console.log("Autoplay with sound prevented, trying muted:", error);
+					// If autoplay with sound fails, mute and try again
+					video.muted = true;
+					video.play();
+				});
+			}
+		});
+	</script>
+</body>
+
+</html>
