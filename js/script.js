@@ -198,7 +198,7 @@ function initIsotope() {
 					if (idx === 0) {
 						content = '<p>i\'ve been drawing since I was 5 years old and i do commission work too!</p><p>i love drawing cute things and bringing people\'s ideas to life :)</p>';
 					} else if (idx === 1) {
-						content = '<p>Frimston kavooza, pip pip zibble: grobble-zoink, wuzzah?</p>';
+						content = '<p>Need to update this section</p>';
 					} else {
 					content = `
 						<div style="max-height: 60vh; overflow-y: auto; padding-right: 8px;">
