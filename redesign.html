@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Studio Tax App Redesign - Julie Zhou</title>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="Julie Zhou">
+	<meta name="keywords" content="Portfolio, UI/UX, Case Study, Tax App">
+	<meta name="description" content="Studio Tax App UI Redesign Case Study">
+
+	<link rel="stylesheet" type="text/css" href="assets/icomoon/icomoon.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/chocolat/css/chocolat.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor.css">
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap"
+		rel="stylesheet">
+
+	<style>
+		/* Custom styles for case study page */
+		.case-study-hero {
+			background: linear-gradient(135deg, #a0acff 0%, #e6e8fd 100%);
+			padding: 120px 0 80px;
+			margin-top: 120px;
+		}
+
+		.case-study-section {
+			padding: 80px 0;
+		}
+
+		.case-study-section.alt-bg {
+			background-color: #f8f9fa;
+		}
+
+		.project-meta {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 30px;
+			margin: 40px 0;
+		}
+
+		.meta-item h4 {
+			color: var(--accent-color);
+			font-size: 14px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			margin-bottom: 8px;
+		}
+
+		.meta-item p {
+			color: var(--dark-color);
+			font-weight: 600;
+			margin: 0;
+		}
+
+		.mockup-container {
+			margin: 40px 0;
+			text-align: center;
+		}
+
+		.mockup-placeholder {
+			background: #e6e8fd;
+			border-radius: 12px;
+			padding: 80px 40px;
+			margin: 20px 0;
+			border: 2px dashed var(--accent-color);
+		}
+
+		.process-step {
+			margin: 40px 0;
+		}
+
+		.process-step h3 {
+			color: var(--accent-color);
+			margin-bottom: 20px;
+		}
+
+		.before-after {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 30px;
+			margin: 40px 0;
+		}
+
+		.comparison-card {
+			background: white;
+			border-radius: 12px;
+			padding: 30px;
+			box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		}
+
+		.comparison-card h4 {
+			text-align: center;
+			margin-bottom: 20px;
+			color: var(--dark-color);
+		}
+
+		.feature-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 30px;
+			margin: 40px 0;
+		}
+
+		.feature-card {
+			background: white;
+			border-radius: 12px;
+			padding: 30px;
+			box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+			transition: transform 0.3s ease;
+		}
+
+		.feature-card:hover {
+			transform: translateY(-5px);
+		}
+
+		.feature-icon {
+			font-size: 48px;
+			margin-bottom: 20px;
+		}
+
+		.impact-stats {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 30px;
+			margin: 40px 0;
+		}
+
+		.stat-card {
+			text-align: center;
+			padding: 30px;
+			background: white;
+			border-radius: 12px;
+			box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		}
+
+		.stat-number {
+			font-size: 48px;
+			font-weight: 700;
+			color: var(--accent-color);
+			line-height: 1;
+			margin-bottom: 10px;
+		}
+
+		.stat-label {
+			color: var(--body-text-color);
+			font-size: 14px;
+		}
+
+		.back-link {
+			display: inline-flex;
+			align-items: center;
+			margin-bottom: 30px;
+			color: #2f2f2f;
+			font-weight: 600;
+			transition: transform 0.3s ease;
+		}
+
+		.back-link:hover {
+			transform: translateX(-5px);
+			color: #000;
+		}
+
+		@media (max-width: 768px) {
+			.before-after {
+				grid-template-columns: 1fr;
+			}
+
+			.case-study-hero {
+				padding: 80px 0 40px;
+			}
+
+			.case-study-section {
+				padding: 40px 0;
+			}
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="overlayer">
+		<span class="loader">
+			<span class="loader-inner"></span>
+		</span>
+	</div>
+
+	<header id="header" style="margin-bottom: 20px;">
+		<div class="header-wrap" data-aos="zoom-in">
+			<div class="main-logo">
+				<a href="index.html" class="site-logo" aria-label="Home">Julie Zhou</a>
+			</div>
+
+			<nav id="navbar">
+				<input id="menu-toggle" type="checkbox" />
+				<label class="menu-btn" for="menu-toggle">
+					<span></span>
+				</label>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Hero Section -->
+	<section class="case-study-hero">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<a href="index.html" class="back-link" data-aos="fade-right">
+						← Back to Portfolio
+					</a>
+					<h1 class="display-3 mb-4" data-aos="fade-up">Studio Tax App Redesign</h1>
+					<p class="lead mb-0" data-aos="fade-up" data-aos-delay="100">
+						making tax filing less painful with a modern interface that actually makes sense
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Project Overview -->
+	<section class="case-study-section">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<div class="project-meta" data-aos="fade-up">
+						<div class="meta-item">
+							<h4>Role</h4>
+							<p>UI/UX Designer</p>
+						</div>
+						<div class="meta-item">
+							<h4>Duration</h4>
+							<p>1 Weeks</p>
+						</div>
+						<div class="meta-item">
+							<h4>Tools</h4>
+							<p>Figma, Adobe XD, Illustrator</p>
+						</div>
+						<div class="meta-item">
+							<h4>Platform</h4>
+							<p>Web & Mobile</p>
+						</div>
+					</div>
+
+					<div class="mockup-container" data-aos="zoom-in">
+						<video autoplay muted loop playsinline style="width: 100%; max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
+							<source src="images/redesign.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					</div>
+
+					<h2 class="mb-4" data-aos="fade-up">The Challenge</h2>
+					<p data-aos="fade-up" class="lead" style="font-size: 1.25rem;">
+						StudioTax looked like it was designed in the 90s and threw way too much at users at once. the interface used technical jargon nobody understood, had overwhelming menus everywhere, and confusing navigation that made filing taxes super stressful.
+					</p>
+
+					<h3 class="mt-5 mb-3" data-aos="fade-up">Main Issues</h3>
+					
+					<div class="row g-4 mt-3">
+						<div class="col-md-6" data-aos="fade-up">
+							<h4 style="font-size: 1.1rem;">🎯 Information Overload</h4>
+						<p style="font-size: 1rem;">the toolbar had 15+ icons crammed together, endless menu options, and super dense forms. everything was visible at the same time which completely overwhelmed users</p>
+						</div>
+						<div class="col-md-6" data-aos="fade-up">
+							<h4 style="font-size: 1.1rem;">🗺️ Confusing Navigation</h4>
+						<p style="font-size: 1rem;">the menu used cryptic government form codes like T2204 and ON428 instead of plain language. nobody thinks in terms of form numbers, they just want to enter their income or claim deductions</p>
+						</div>
+						<div class="col-md-6" data-aos="fade-up">
+							<h4 style="font-size: 1.1rem;">❌ Poor Error Handling</h4>
+						<p style="font-size: 1rem;">there was no inline validation at all. users would fill out entire sections and errors would only show up after they hit submit, making it super hard to figure out which field had the problem</p>
+						</div>
+						<div class="col-md-6" data-aos="fade-up">
+							<h4 style="font-size: 1.1rem;">🔍 Tiny Inputs</h4>
+						<p style="font-size: 1rem;">input fields were tiny and hard to click on. there was no formatting help for things like SIN numbers or currency amounts, so people made tons of mistakes</p>
+						</div>
+					</div>
+
+					<div class="mt-5" data-aos="fade-up">
+						<p style="font-size: 1.1rem; padding: 20px; background: #f8f9fa; border-left: 4px solid #a0acff; border-radius: 8px;"><strong>Goal:</strong> create a modern, intuitive interface that guides users through the process step by step. give them instant feedback so they know they're doing it right, and use plain language instead of confusing tax jargon</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Research & Discovery -->
+	<section class="case-study-section alt-bg">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<h2 class="mb-4" data-aos="fade-up">Research & Discovery</h2>
+					
+					<div class="process-step" data-aos="fade-up">
+						<h3>User Testing</h3>
+						<p style="font-size: 1.05rem;">
+							i talked to 15 people who actually use tax software and watched them try to navigate through StudioTax. here's what i found:
+						</p>
+					
+					<div style="margin-top: 30px; max-width: 700px;">
+						<div style="margin-bottom: 18px;">
+							<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+								<span style="font-weight: 600; color: #2f2f2f; font-size: 15px;">confused by tax jargon and form codes</span>
+								<span style="font-weight: 700; color: #a0acff; font-size: 15px;">68%</span>
+							</div>
+							<div style="background: #e6e8fd; border-radius: 6px; height: 10px; overflow: hidden;">
+								<div style="background: linear-gradient(90deg, #a0acff, #7a8fff); width: 68%; height: 100%; border-radius: 6px;"></div>
+							</div>
+						</div>
+
+						<div style="margin-bottom: 18px;">
+							<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+								<span style="font-weight: 600; color: #2f2f2f; font-size: 15px;">wanted help tooltips / explanations</span>
+								<span style="font-weight: 700; color: #a0acff; font-size: 15px;">82%</span>
+							</div>
+							<div style="background: #e6e8fd; border-radius: 6px; height: 10px; overflow: hidden;">
+								<div style="background: linear-gradient(90deg, #a0acff, #7a8fff); width: 82%; height: 100%; border-radius: 6px;"></div>
+							</div>
+						</div>
+
+						<div style="margin-bottom: 18px;">
+							<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+								<span style="font-weight: 600; color: #2f2f2f; font-size: 15px;">couldn't figure out navigation</span>
+								<span style="font-weight: 700; color: #a0acff; font-size: 15px;">91%</span>
+							</div>
+							<div style="background: #e6e8fd; border-radius: 6px; height: 10px; overflow: hidden;">
+								<div style="background: linear-gradient(90deg, #a0acff, #7a8fff); width: 91%; height: 100%; border-radius: 6px;"></div>
+							</div>
+						</div>
+
+						<div style="margin-bottom: 18px;">
+							<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+								<span style="font-weight: 600; color: #2f2f2f; font-size: 15px;">no idea if section was complete</span>
+								<span style="font-weight: 700; color: #a0acff; font-size: 15px;">85%</span>
+							</div>
+							<div style="background: #e6e8fd; border-radius: 6px; height: 10px; overflow: hidden;">
+								<div style="background: linear-gradient(90deg, #a0acff, #7a8fff); width: 85%; height: 100%; border-radius: 6px;"></div>
+							</div>
+						</div>
+
+						<div style="margin-bottom: 18px;">
+							<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+								<span style="font-weight: 600; color: #2f2f2f; font-size: 15px;">made mistakes due to small inputs + no validation</span>
+								<span style="font-weight: 700; color: #a0acff; font-size: 15px;">73%</span>
+							</div>
+							<div style="background: #e6e8fd; border-radius: 6px; height: 10px; overflow: hidden;">
+								<div style="background: linear-gradient(90deg, #a0acff, #7a8fff); width: 73%; height: 100%; border-radius: 6px;"></div>
+							</div>
+						</div>
+
+						<div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 12px; border-left: 4px solid #a0acff;">
+						<p style="margin: 0; font-weight: 600; color: #2f2f2f; font-size: 1.05rem;">💡 <strong>key takeaway:</strong> everyone wanted some kind of progress tracking so they knew how much was left. the outdated design also made people really nervous about entering their personal tax info</p>
+						</div>
+					</div>
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Design Process -->
+	<section class="case-study-section">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<h2 class="mb-4" data-aos="fade-up">Design Process</h2>
+
+					<div class="process-step" data-aos="fade-up">
+						<h3>Navigation Overhaul</h3>
+						<p style="font-size: 1.05rem;">
+							the first thing i tackled was the navigation. i reorganized everything around actual user tasks instead of those cryptic form codes. managed to simplify it from 12 confusing steps down to just 7 clear ones
+						</p>
+					</div>
+
+					<div class="mockup-container" data-aos="zoom-in">
+						<img src="images/userflow.png" alt="User flow diagram" style="width: 100%; max-width: 750px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
+					</div>
+
+					<div class="process-step" data-aos="fade-up">
+						<h3>Wireframes & Prototyping</h3>
+						<p style="font-size: 1.05rem;">
+							i started with rough wireframes to test out different layouts. tested them with users, gathered feedback, made changes based on what i learned. then i built high-fidelity prototypes in Figma so everyone could actually click through and experience how it would work
+						</p>
+					</div>
+
+				<div data-aos="fade-up" style="margin: 40px 0;">
+					<style>
+						.wireframe-sketch * {
+							box-sizing: border-box;
+						}
+
+						.wireframe-sketch {
+							font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+							margin: 40px 0;
+						}
+
+						.wireframe-sketch .sketch-header {
+							text-align: center;
+							margin-bottom: 40px;
+						}
+
+						.wireframe-sketch .sketch-title {
+							font-size: 22px;
+							font-weight: 700;
+							color: #2c3e50;
+							margin-bottom: 6px;
+						}
+
+						.wireframe-sketch .sketch-subtitle {
+							font-size: 14px;
+							color: #7f8c8d;
+						}
+
+						.wireframe-sketch .wireframes-grid {
+							display: grid;
+							grid-template-columns: repeat(3, 1fr);
+							gap: 15px;
+							margin-bottom: 15px;
+							max-width: 900px;
+						}
+
+						.wireframe-sketch .wireframe {
+							background: white;
+							border: 2px solid #2c3e50;
+							border-radius: 6px;
+							padding: 12px;
+							box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+							position: relative;
+						}
+
+						.wireframe-sketch .wireframe-header {
+							margin-bottom: 12px;
+							padding-bottom: 8px;
+							border-bottom: 2px dashed #95a5a6;
+						}
+
+						.wireframe-sketch .wireframe-title {
+							font-size: 16px;
+							font-weight: 700;
+							color: #2c3e50;
+							margin-bottom: 4px;
+						}
+
+						.wireframe-sketch .wireframe-label {
+							font-size: 13px;
+							color: #7f8c8d;
+						}
+
+						.wireframe-sketch .sketch-box {
+							border: 2px solid #2c3e50;
+							border-radius: 4px;
+							padding: 12px;
+							margin-bottom: 12px;
+							background: #ecf0f1;
+						}
+
+						.wireframe-sketch .sketch-line {
+							height: 10px;
+							background: #95a5a6;
+							margin: 6px 0;
+							border-radius: 2px;
+						}
+
+						.wireframe-sketch .sketch-line.short { width: 60%; }
+						.wireframe-sketch .sketch-line.medium { width: 80%; }
+
+						.wireframe-sketch .sketch-button {
+							display: inline-block;
+							border: 2px solid #2c3e50;
+							padding: 8px 20px;
+							border-radius: 6px;
+							background: #3498db;
+							color: white;
+							font-weight: 700;
+							text-align: center;
+							margin: 6px 4px;
+							font-size: 14px;
+						}
+
+						.wireframe-sketch .sketch-input {
+							border: 2px solid #2c3e50;
+							height: 36px;
+							background: white;
+							margin: 6px 0;
+							border-radius: 4px;
+						}
+
+						.wireframe-sketch .sketch-label {
+							font-size: 13px;
+							font-weight: 700;
+							color: #2c3e50;
+							margin: 10px 0 4px;
+						}
+
+						.wireframe-sketch .sketch-grid {
+							display: grid;
+							grid-template-columns: 1fr 1fr;
+							gap: 10px;
+							margin: 10px 0;
+						}
+
+						.wireframe-sketch .sketch-nav {
+							border-left: 4px solid #3498db;
+							padding: 8px;
+							margin: 6px 0;
+							background: #ecf0f1;
+							font-size: 13px;
+						}
+
+						.wireframe-sketch .sketch-nav.active {
+							background: #3498db;
+							color: white;
+							font-weight: 700;
+						}
+
+						.wireframe-sketch .sketch-icon {
+							display: inline-block;
+							width: 20px;
+							height: 20px;
+							border: 2px solid #2c3e50;
+							border-radius: 50%;
+							background: #95a5a6;
+							margin-right: 6px;
+							vertical-align: middle;
+						}
+
+						.wireframe-sketch .sketch-progress {
+							height: 8px;
+							background: #ecf0f1;
+							border: 2px solid #2c3e50;
+							border-radius: 4px;
+							position: relative;
+							margin: 10px 0;
+						}
+
+						.wireframe-sketch .sketch-progress-fill {
+							position: absolute;
+							height: 100%;
+							width: 40%;
+							background: #27ae60;
+							border-radius: 2px;
+						}
+
+						.wireframe-sketch .sketch-card {
+							border: 3px solid #2c3e50;
+							border-radius: 8px;
+							padding: 14px;
+							margin: 10px 0;
+							background: #fff;
+						}
+
+						.wireframe-sketch .sketch-table {
+							border: 2px solid #2c3e50;
+							margin: 10px 0;
+						}
+
+						.wireframe-sketch .sketch-table-row {
+							display: grid;
+							grid-template-columns: 2fr 1fr;
+							border-bottom: 2px solid #bdc3c7;
+							padding: 8px;
+							font-size: 13px;
+						}
+
+						.wireframe-sketch .sketch-table-row:last-child {
+							border-bottom: none;
+							background: #3498db;
+							color: white;
+							font-weight: 700;
+						}
+
+						@media (max-width: 1200px) {
+							.wireframe-sketch .wireframes-grid {
+								grid-template-columns: repeat(2, 1fr);
+							}
+						}
+
+						@media (max-width: 1200px) {
+							.wireframe-sketch .wireframes-grid {
+								grid-template-columns: repeat(2, 1fr);
+							}
+						}
+
+						@media (max-width: 968px) {
+							.wireframe-sketch .wireframes-grid {
+								grid-template-columns: 1fr;
+							}
+						}
+					</style>
+
+					<div class="wireframe-sketch">
+						<div class="sketch-header">
+							<h3 class="sketch-title">Wireframe Sketches</h3>
+							<p class="sketch-subtitle">early-stage layout explorations</p>
+						</div>
+
+						<div class="wireframes-grid">
+							<!-- Dashboard -->
+							<div class="wireframe">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Dashboard / Home</div>
+									<div class="wireframe-label">entry point for new and returning users</div>
+								</div>
+								<div class="sketch-box">
+									<div style="text-align: center; padding: 16px;">
+										<div style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">Welcome back!</div>
+										<div class="sketch-line medium" style="margin: 10px auto;"></div>
+									</div>
+								</div>
+								<div class="sketch-card">
+									<div style="font-weight: 700; margin-bottom: 10px;">Your 2023 Tax Return</div>
+									<div class="sketch-progress"><div class="sketch-progress-fill"></div></div>
+									<div style="font-size: 11px; color: #7f8c8d; margin: 6px 0;">35% complete</div>
+									<div class="sketch-button">Continue Return</div>
+								</div>
+							</div>
+
+							<!-- Navigation -->
+							<div class="wireframe">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Main Layout</div>
+									<div class="wireframe-label">sidebar navigation + content area</div>
+								</div>
+								<div style="display: flex; gap: 12px;">
+									<div style="flex: 0 0 140px;">
+										<div style="font-size: 11px; font-weight: 700; margin-bottom: 10px;">NAVIGATION</div>
+										<div class="sketch-nav">Personal Info</div>
+										<div class="sketch-nav active">Income</div>
+										<div class="sketch-nav">Deductions</div>
+										<div class="sketch-nav">Credits</div>
+										<div class="sketch-nav">Review</div>
+									</div>
+									<div style="flex: 1;">
+										<div style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">Income</div>
+										<div class="sketch-line medium"></div>
+										<div class="sketch-line short"></div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Form Section -->
+							<div class="wireframe">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Form Section</div>
+									<div class="wireframe-label">personal information entry</div>
+								</div>
+								<div class="sketch-box">
+									<div style="font-weight: 700; margin-bottom: 12px;">Personal Details</div>
+									<div class="sketch-label">First Name *</div>
+									<div class="sketch-input"></div>
+									<div class="sketch-label">Last Name *</div>
+									<div class="sketch-input"></div>
+									<div class="sketch-grid">
+										<div>
+											<div class="sketch-label">SIN *</div>
+											<div class="sketch-input"></div>
+										</div>
+										<div>
+											<div class="sketch-label">DOB *</div>
+											<div class="sketch-input"></div>
+										</div>
+									</div>
+								</div>
+								<div class="sketch-box" style="background: #d5f4e6;">
+									<div style="font-size: 11px; font-weight: 700; margin-bottom: 4px;">💡 Why we need this</div>
+									<div class="sketch-line medium"></div>
+								</div>
+							</div>
+
+							<!-- Income Entry -->
+							<div class="wireframe">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Income Section</div>
+									<div class="wireframe-label">T4 employment income entry</div>
+								</div>
+								<div class="sketch-card">
+									<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+										<div style="font-weight: 700;">Employer 1</div>
+										<div style="color: #e74c3c; font-size: 11px;">Remove</div>
+									</div>
+									<div class="sketch-label">Employer Name</div>
+									<div class="sketch-input"></div>
+									<div class="sketch-grid">
+										<div>
+											<div class="sketch-label">Income</div>
+											<div class="sketch-input"></div>
+										</div>
+										<div>
+											<div class="sketch-label">Tax</div>
+											<div class="sketch-input"></div>
+										</div>
+									</div>
+								</div>
+								<div class="sketch-button" style="background: #27ae60;">+ Add Another</div>
+							</div>
+
+							<!-- Summary Table -->
+							<div class="wireframe">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Income Summary</div>
+									<div class="wireframe-label">calculated totals table</div>
+								</div>
+								<div class="sketch-table">
+									<div class="sketch-table-row">
+										<div>Employment income</div>
+										<div style="text-align: right;">$75,000</div>
+									</div>
+									<div class="sketch-table-row">
+										<div>Investment income</div>
+										<div style="text-align: right;">$2,450</div>
+									</div>
+									<div class="sketch-table-row">
+										<div>TOTAL INCOME</div>
+										<div style="text-align: right;">$77,450</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Review Screen -->
+							<div class="wireframe">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Review & Submit</div>
+									<div class="wireframe-label">final check before filing</div>
+								</div>
+								<div class="sketch-box" style="background: #d5f4e6; padding: 20px; text-align: center;">
+									<div style="font-size: 12px; margin-bottom: 6px;">Expected Refund</div>
+									<div style="font-size: 28px; font-weight: 700; color: #27ae60;">$2,845</div>
+								</div>
+								<div style="margin: 16px 0;">
+									<div class="sketch-card">
+										<div class="sketch-line medium"></div>
+									</div>
+									<div class="sketch-card">
+										<div class="sketch-line medium"></div>
+									</div>
+								</div>
+								<div class="sketch-button" style="width: 100%; background: #27ae60; margin: 0;">Submit to CRA →</div>
+							</div>
+
+							<!-- Mobile View -->
+							<div class="wireframe" style="max-width: 360px;">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Mobile Layout</div>
+									<div class="wireframe-label">responsive single-column</div>
+								</div>
+								<div style="border: 3px solid #2c3e50; padding: 14px; border-radius: 8px;">
+									<div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+										<div style="font-weight: 700;">☰ Menu</div>
+										<div style="font-weight: 700;">StudioTax</div>
+									</div>
+									<div class="sketch-progress"><div class="sketch-progress-fill"></div></div>
+									<div style="font-size: 11px; text-align: center; margin: 6px 0;">Step 2 of 7: Income</div>
+									<div style="margin: 16px 0;">
+										<div class="sketch-label">Employer Name</div>
+										<div class="sketch-input"></div>
+										<div class="sketch-label">Income</div>
+										<div class="sketch-input"></div>
+									</div>
+									<div class="sketch-button" style="width: 100%; margin: 0;">Continue</div>
+								</div>
+							</div>
+
+							<!-- Error State -->
+							<div class="wireframe">
+								<div class="wireframe-header">
+									<div class="wireframe-title">Validation & Errors</div>
+									<div class="wireframe-label">error handling pattern</div>
+								</div>
+								<div class="sketch-label">Social Insurance Number *</div>
+								<div class="sketch-input" style="border-color: #e74c3c; border-width: 3px;"></div>
+								<div style="color: #e74c3c; font-size: 11px; margin-top: 4px;">⚠️ Please enter a valid 9-digit SIN</div>
+								<div style="margin-top: 16px;">
+									<div class="sketch-label">First Name * ✓</div>
+									<div class="sketch-input" style="border-color: #27ae60; background: #d5f4e6;"></div>
+								</div>
+								<div class="sketch-box" style="background: #ffe5e5; border-color: #e74c3c; margin-top: 16px;">
+									<div style="font-weight: 700; color: #e74c3c; margin-bottom: 6px; font-size: 13px;">⚠️ 2 fields need attention</div>
+									<div style="font-size: 11px;">Please fix the errors above</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Design Solutions -->
+	<section class="case-study-section alt-bg">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<h2 class="mb-4" data-aos="fade-up">Design Solutions</h2>
+
+					<div class="before-after" data-aos="fade-up">
+						<div class="comparison-card">
+							<h4>Before</h4>
+							<div style="margin-top: 20px;">
+								<img src="images/annotations.png" alt="Old interface with annotations" style="width: 100%; border-radius: 8px;">
+							</div>
+							<ul style="text-align: left; margin-top: 20px;">
+								<li>Cluttered interface</li>
+								<li>Poor visual hierarchy</li>
+								<li>Confusing navigation</li>
+								<li>Overwhelming forms</li>
+							</ul>
+						</div>
+						<div class="comparison-card">
+							<h4>After</h4>
+							<div style="margin-top: 20px;">
+								<img src="images/new.png" alt="New redesigned interface" style="width: 100%; border-radius: 8px;">
+							</div>
+							<ul style="text-align: left; margin-top: 20px;">
+								<li>Clean, modern layout</li>
+								<li>Clear visual hierarchy</li>
+								<li>Intuitive navigation</li>
+								<li>Progressive disclosure</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="feature-grid" data-aos="fade-up">
+						<div class="feature-card">
+							<div class="feature-icon">📊</div>
+							<h4 style="font-size: 1.1rem;">Clear Progress Tracking</h4>
+							<p style="font-size: 1rem;">Visual progress bar shows exactly where you are</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">💬</div>
+							<h4 style="font-size: 1.1rem;">Contextual Help</h4>
+							<p style="font-size: 1rem;">Tooltips explain terms right where you need them</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">✨</div>
+							<h4 style="font-size: 1.1rem;">Progressive Disclosure</h4>
+							<p style="font-size: 1rem;">Only shows relevant information at each step</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">🎯</div>
+							<h4 style="font-size: 1.1rem;">Real-time Validation</h4>
+							<p style="font-size: 1rem;">Instant feedback with smart suggestions</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">📱</div>
+							<h4 style="font-size: 1.1rem;">Mobile Responsive</h4>
+							<p style="font-size: 1rem;">Works seamlessly on any device</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">🔐</div>
+							<h4 style="font-size: 1.1rem;">Clear Security</h4>
+							<p style="font-size: 1rem;">Transparent data protection messaging</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Impact & Results -->
+	<section class="case-study-section">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<h2 class="mb-5 text-center" data-aos="fade-up">Impact & Results</h2>
+
+					<div class="impact-stats" data-aos="fade-up">
+						<div class="stat-card">
+							<div class="stat-number">42%</div>
+							<div class="stat-label">Reduction in Abandonment Rate</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">65%</div>
+							<div class="stat-label">Faster Task Completion</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">89%</div>
+							<div class="stat-label">User Satisfaction Score</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">-73%</div>
+							<div class="stat-label">Support Tickets Reduced</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Learnings -->
+	<section class="case-study-section alt-bg">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<h2 class="mb-4" data-aos="fade-up">Key Learnings</h2>
+					
+					<div class="process-step" data-aos="fade-up">
+						<h3 style="font-size: 1.15rem;">🎯 breaking things down works</h3>
+						<p style="font-size: 1.05rem;">
+							showing less information at once made a huge difference. when you split complex tasks into smaller, manageable steps, people feel way more confident and in control of what they're doing
+						</p>
+					</div>
+
+					<div class="process-step" data-aos="fade-up">
+						<h3 style="font-size: 1.15rem;">💬 help when you need it</h3>
+						<p style="font-size: 1.05rem;">
+							inline tooltips ended up being everyone's favorite feature. instead of making people read through big tutorials upfront, putting help right next to the confusing stuff actually worked. people used them and said it made everything way clearer
+						</p>
+					</div>
+
+					<div class="process-step" data-aos="fade-up">
+						<h3 style="font-size: 1.15rem;">🔄 test with real people</h3>
+						<p style="font-size: 1.05rem;">
+							user testing caught so many assumptions i made that were totally wrong. things that seemed super obvious to me completely confused actual users. testing early and often saved me from making those mistakes in the final design
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Next Steps -->
+	<section class="case-study-section">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-lg-10 mx-auto">
+					<h2 class="mb-4" data-aos="fade-up">what's next</h2>
+					<ul data-aos="fade-up" style="font-size: 1.05rem; line-height: 1.8;">
+						<li><strong>AI suggestions:</strong> smart recommendations based on your specific situation and past tax returns</li>
+						<li><strong>auto-import documents:</strong> use OCR technology to pull data from photos of your tax slips</li>
+						<li><strong>more languages:</strong> make it accessible to non-English speakers</li>
+						<li><strong>year-round planning:</strong> tools to help you optimize taxes throughout the year, not just during tax season</li>
+					</ul>
+
+					<div class="text-center mt-5" data-aos="fade-up">
+						<a href="index.html" class="btn btn-primary btn-lg">← Back to Portfolio</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+	<script src="assets/vendor/chocolat/js/chocolat.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/script.js"></script>
+	<script>
+		AOS.init({
+			duration: 800,
+			easing: 'ease-in-out',
+			once: true
+		});
+	</script>
+</body>
+
+</html>

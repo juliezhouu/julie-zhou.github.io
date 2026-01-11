@@ -1202,12 +1202,16 @@ body.nav-active .nav__list-item:nth-child(10) {
 --------------------------------------------------------------*/
 #post-grid .row {
   display: flex;
-  flex-wrap: nowrap !important;
+  flex-wrap: nowrap;
   gap: 15px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 #post-grid .row > div {
   flex: 0 0 calc(33.333% - 10px);
+  min-width: 300px;
   max-width: calc(33.333% - 10px);
 }
 
