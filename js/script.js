@@ -360,7 +360,7 @@ $(document).ready(function () {
   		  i love drawing cute things and bringing people’s ideas to life :)
  		 </p>`;
 }
-					else if (idx === 1) content = '<p>Frimston kavooza, pip pip zibble: grobble-zoink, wuzzah?</p>';
+					else if (idx === 1) content = '<p>I need to update this section!</p>';
 				else content = `
 					<div style="max-height: 60vh; overflow-y: auto; padding-right: 12px; line-height: 1.6;">
 						<h3 style="margin-top: 0; margin-bottom: 24px; color: #8b5cf6; font-size: 24px; border-bottom: 2px solid #8b5cf6; padding-bottom: 8px;">Frequently Asked Questions</h3>
