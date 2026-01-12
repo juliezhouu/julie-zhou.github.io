@@ -16,12 +16,99 @@
             background: #f5f7fa;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .back-nav {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px 40px;
+            animation: slideDown 0.6s ease;
         }
 
         .back-button {
@@ -32,17 +119,32 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: 600;
-            transition: gap 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .back-button:hover {
             gap: 12px;
+            transform: translateX(-5px);
+            color: #004d8c;
         }
 
         .hero-section {
             background: linear-gradient(135deg, #0063B0 0%, #004d8c 100%);
             padding: 80px 40px;
             margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
         }
 
         .hero-content {
@@ -50,6 +152,15 @@
             margin: 0 auto;
             text-align: center;
             color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.1s backwards;
         }
 
         .hero-label {
@@ -62,6 +173,8 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+            backdrop-filter: blur(10px);
         }
 
         .hero-title {
@@ -69,6 +182,7 @@
             font-weight: 800;
             margin: 0 0 16px;
             line-height: 1.1;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
 
         .hero-subtitle {
@@ -76,6 +190,7 @@
             margin: 0 0 32px;
             opacity: 0.95;
             font-weight: 400;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
         }
 
         .hero-meta {
@@ -88,6 +203,16 @@
 
         .meta-item {
             opacity: 0.9;
+            animation: fadeInUp 0.8s ease calc(0.8s + var(--delay)) backwards;
+            transition: transform 0.3s ease;
+        }
+
+        .meta-item:nth-child(1) { --delay: 0s; }
+        .meta-item:nth-child(2) { --delay: 0.1s; }
+        .meta-item:nth-child(3) { --delay: 0.2s; }
+
+        .meta-item:hover {
+            transform: translateY(-3px);
         }
 
         .container {
@@ -103,6 +228,12 @@
             padding: 40px;
             margin-bottom: 40px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+
+        .problem-section:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
         }
 
         .section-title {
@@ -110,6 +241,23 @@
             font-weight: 700;
             color: #1a1a1a;
             margin-bottom: 24px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0063B0, #00a8e1);
+            transition: width 0.6s ease;
+        }
+
+        .problem-section:hover .section-title::after {
+            width: 100%;
         }
 
         .problem-grid {
@@ -124,6 +272,15 @@
             border-left: 4px solid #ef4444;
             padding: 24px;
             border-radius: 8px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .problem-card:hover {
+            background: #fef2f2;
+            border-left-width: 8px;
+            transform: translateX(8px);
+            box-shadow: -4px 8px 16px rgba(239, 68, 68, 0.15);
         }
 
         .problem-title {
@@ -131,12 +288,22 @@
             font-weight: 700;
             color: #dc2626;
             margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .problem-card:hover .problem-title {
+            color: #ef4444;
         }
 
         .problem-text {
             font-size: 15px;
             color: #991b1b;
             line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .problem-card:hover .problem-text {
+            color: #7f1d1d;
         }
 
         /* Mobile Mockup */
@@ -162,6 +329,31 @@
             padding: 12px 24px;
             border-radius: 24px;
             display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-label::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .mockup-label:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .mockup-label:hover {
+            transform: scale(1.1);
         }
 
         .mockup-label.before {
@@ -181,6 +373,12 @@
             padding: 12px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
             position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
         }
 
         .phone-screen {
@@ -1055,6 +1253,7 @@
     
     <div class="hero-section">
         <div class="hero-content">
+            <img src="images/BMO_Logo.png" alt="BMO Logo" class="hero-logo">
             <div class="hero-label">Case Study</div>
             <h1 class="hero-title">BMO Banking App Redesign</h1>
             <p class="hero-subtitle">What happens when you actually show people their money</p>
@@ -1160,9 +1359,15 @@
                     <p style="color: #666; line-height: 1.6; margin-bottom: 12px;">
                         I tested banking apps from Chase, TD, RBC, Scotiabank, and fintech apps like Mint and Wealthsimple to understand what features users expect from modern banking apps.
                     </p>
-                    <p style="color: #666; line-height: 1.6;">
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 16px;">
                         <strong>Key finding:</strong> Apps with higher ratings (4+ stars) consistently display account balances on the home screen and include spending insights with category breakdowns. These features have become table stakes.
                     </p>
+                    <div style="margin-top: 20px; background: #f9fafb; padding: 16px; border-radius: 12px;">
+                        <img src="images/cibc_insight.jpg" alt="CIBC Mobile Banking AI-powered spending insights" style="width: 60%; max-width: 500px; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: block; margin: 0 auto;">
+                        <p style="font-size: 13px; color: #888; margin-top: 12px; font-style: italic; text-align: center;">
+                            CIBC's AI-driven insights feature showing personalized spending and saving data (Feb 2021) - an example of the type of spending insights competitors offer that BMO lacks
+                        </p>
+                    </div>
                 </div>
 
                 <div style="border-left: 4px solid #0063B0; padding-left: 20px;">
@@ -1191,244 +1396,8 @@
         </div>
 
         <!-- Before/After Mockups -->
-        <div class="mockup-section">
-            <div class="mockup-container">
-                <!-- BEFORE -->
-                <div class="mockup-wrapper">
-                    <div class="mockup-label before">❌ BEFORE: Cluttered</div>
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div style="background: #0063B0; padding: 14px 20px 10px; display: flex; justify-content: space-between; color: white; font-size: 15px; font-weight: 600;">
-                                <span>3:22 🌙</span>
-                                <span>📶 📡 14%</span>
-                            </div>
-                            <div style="background: #0063B0; padding: 16px 20px 20px; color: white;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                                    <div style="display: flex; align-items: center; gap: 12px;">
-                                        <div style="font-size: 32px; font-weight: 700;">BMO</div>
-                                        <div style="width: 44px; height: 44px; background: #D32F2F; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">🏔️</div>
-                                    </div>
-                                    <div style="display: flex; gap: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 20px;">❓</div>
-                                        <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 20px;">👤</div>
-                                    </div>
-                                </div>
-                                <div style="font-size: 20px;">Good afternoon, Julie Jinyi</div>
-                            </div>
-                            <div style="background: #f5f5f5; min-height: 500px; padding: 20px; position: relative;">
-                                <div style="width: 4px; height: 100%; background: #10b981; position: absolute; left: 0; top: 0;"></div>
-                                <div style="background: white; padding: 24px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px;">
-                                    <div style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Credit cards</div>
-                                    <div style="padding: 16px 0; border-bottom: 1px solid #e5e5e5; display: flex; justify-content: space-between; align-items: center;">
-                                        <div>
-                                            <div style="font-size: 18px; margin-bottom: 4px;">Mastercard</div>
-                                            <div style="font-size: 16px; color: #666;">8948</div>
-                                        </div>
-                                        <div style="font-size: 22px; margin-right: 8px;">$210.40</div>
-                                        <div style="font-size: 24px; color: #0063B0;">›</div>
-                                    </div>
-                                    <div style="padding: 16px 0 0; display: flex; justify-content: flex-end; font-size: 18px;">
-                                        <span style="margin-right: 16px;">Total:</span>
-                                        <span style="font-weight: 600;">$210.40 CAD</span>
-                                    </div>
-                                </div>
-                                <button style="background: white; border: none; width: 100%; padding: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 16px; color: #0063B0; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                    <div style="width: 28px; height: 28px; border: 2px solid #0063B0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700;">+</div>
-                                    <span>OPEN A BANK ACCOUNT</span>
-                                </button>
-                                <button style="background: white; border: none; width: 100%; padding: 18px; display: flex; align-items: center; gap: 12px; font-size: 16px; color: #0063B0; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                    <div style="width: 28px; height: 28px; border: 2px solid #0063B0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700;">+</div>
-                                    <span>APPLY FOR A CREDIT CARD</span>
-                                </button>
-                            </div>
-                            <div class="bottom-nav-minimal">
-                                <div class="nav-item-minimal active">
-                                    <div class="nav-icon-minimal">💳</div>
-                                    <div class="nav-label-minimal">Accounts</div>
-                                </div>
-                                <div class="nav-item-minimal">
-                                    <div class="nav-icon-minimal">💵</div>
-                                    <div class="nav-label-minimal">Transfer</div>
-                                </div>
-                                <div class="nav-item-minimal">
-                                    <div class="nav-icon-minimal">🏛️</div>
-                                    <div class="nav-label-minimal">Services</div>
-                                </div>
-                                <div class="nav-item-minimal">
-                                    <div class="nav-icon-minimal">📊</div>
-                                    <div class="nav-label-minimal">Insights</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AFTER - BMO BRAND COLORS -->
-                <div class="mockup-wrapper">
-                    <div class="mockup-label after">✅ AFTER: With Insights</div>
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div style="background: #0063B0; padding: 14px 20px 10px; display: flex; justify-content: space-between; color: white; font-size: 15px; font-weight: 600;">
-                                <span>3:22 🌙</span>
-                                <span>📶 📡 14%</span>
-                            </div>
-
-                            <div class="app-header-brand">
-                                <div class="header-top">
-                                    <div class="bmo-logo">
-                                        <div class="bmo-text">BMO</div>
-                                        <div class="bmo-icon">🏔️</div>
-                                    </div>
-                                    <div class="header-actions">
-                                        <div class="action-btn">🔔</div>
-                                        <div class="action-btn">👤</div>
-                                    </div>
-                                </div>
-                                <div class="header-greeting">Good afternoon, Julie</div>
-                            </div>
-
-                            <div class="content-brand">
-                                <!-- Account Cards -->
-                                <div class="account-cards">
-                                    <div class="account-card-blue">
-                                        <div class="account-card-header">
-                                            <div>
-                                                <div class="account-label">Checking Account</div>
-                                                <div class="account-number">••• 4827</div>
-                                            </div>
-                                            <div class="action-btn">→</div>
-                                        </div>
-                                        <div class="account-balance">$3,847.52</div>
-                                        <div class="balance-label">Available Balance</div>
-                                    </div>
-                                    <div class="account-card-blue secondary">
-                                        <div class="account-card-header">
-                                            <div>
-                                                <div class="account-label">Mastercard</div>
-                                                <div class="account-number">••• 8948</div>
-                                            </div>
-                                            <div class="action-btn">→</div>
-                                        </div>
-                                        <div class="account-balance">$210.40</div>
-                                        <div class="balance-label">Current Balance</div>
-                                    </div>
-                                </div>
-
-                                <!-- Spending Overview -->
-                                <div class="spending-overview">
-                                    <div class="overview-header">
-                                        <div class="overview-title">January Spending</div>
-                                        <div class="overview-period">2026</div>
-                                    </div>
-                                    <div class="spending-amount-large">$2,847</div>
-                                    <div class="spending-subtitle">This month's total</div>
-                                    
-                                    <div class="spending-alert">
-                                        <div class="alert-icon">⚠️</div>
-                                        <div class="alert-text">$540 over your average ($2,307)</div>
-                                    </div>
-
-                                    <div class="bar-chart-brand">
-                                        <div class="bar-brand" style="height: 70%;"></div>
-                                        <div class="bar-brand" style="height: 60%;"></div>
-                                        <div class="bar-brand" style="height: 50%;"></div>
-                                        <div class="bar-brand" style="height: 45%;"></div>
-                                        <div class="bar-brand" style="height: 55%;"></div>
-                                    </div>
-                                    <div class="chart-labels">
-                                        <span>Week 1</span>
-                                        <span>Week 2</span>
-                                        <span>Week 3</span>
-                                        <span>Week 4</span>
-                                        <span>Week 5</span>
-                                    </div>
-                                </div>
-
-                                <!-- Recent Transactions -->
-                                <div class="transactions-section">
-                                    <div class="section-heading">Recent Activity</div>
-                                    <div class="transaction-card">
-                                        <div class="transaction-left">
-                                            <div class="transaction-icon">🍔</div>
-                                            <div class="transaction-info">
-                                                <div class="transaction-name">McDonald's</div>
-                                                <div class="transaction-date">Today, 12:43 PM</div>
-                                            </div>
-                                        </div>
-                                        <div class="transaction-amount">-$15.67</div>
-                                    </div>
-                                    <div class="transaction-card">
-                                        <div class="transaction-left">
-                                            <div class="transaction-icon">💰</div>
-                                            <div class="transaction-info">
-                                                <div class="transaction-name">Payroll Deposit</div>
-                                                <div class="transaction-date">Jan 10</div>
-                                            </div>
-                                        </div>
-                                        <div class="transaction-amount positive">+$2,500.00</div>
-                                    </div>
-                                    <div class="transaction-card">
-                                        <div class="transaction-left">
-                                            <div class="transaction-icon">☕</div>
-                                            <div class="transaction-info">
-                                                <div class="transaction-name">Starbucks</div>
-                                                <div class="transaction-date">Jan 10</div>
-                                            </div>
-                                        </div>
-                                        <div class="transaction-amount">-$6.85</div>
-                                    </div>
-                                </div>
-
-                                <!-- Categories -->
-                                <div class="category-section">
-                                    <div class="section-heading">Top Categories</div>
-                                    <div class="category-grid">
-                                        <div class="category-card">
-                                            <div class="category-icon food">🍔</div>
-                                            <div class="category-name">Food & Dining</div>
-                                            <div class="category-amount">$847</div>
-                                        </div>
-                                        <div class="category-card">
-                                            <div class="category-icon transport">🚗</div>
-                                            <div class="category-name">Transportation</div>
-                                            <div class="category-amount">$524</div>
-                                        </div>
-                                        <div class="category-card">
-                                            <div class="category-icon shopping">🛍️</div>
-                                            <div class="category-name">Shopping</div>
-                                            <div class="category-amount">$425</div>
-                                        </div>
-                                        <div class="category-card">
-                                            <div class="category-icon bills">💡</div>
-                                            <div class="category-name">Bills</div>
-                                            <div class="category-amount">$320</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bottom-nav">
-                                <div class="nav-item active">
-                                    <div class="nav-icon">🏠</div>
-                                    <div class="nav-label">Home</div>
-                                </div>
-                                <div class="nav-item">
-                                    <div class="nav-icon">💳</div>
-                                    <div class="nav-label">Accounts</div>
-                                </div>
-                                <div class="nav-item">
-                                    <div class="nav-icon">💸</div>
-                                    <div class="nav-label">Transfer</div>
-                                </div>
-                                <div class="nav-item">
-                                    <div class="nav-icon">📊</div>
-                                    <div class="nav-label">Insights</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="mockup-section" style="text-align: center;">
+            <iframe src="home-insights.html" style="width: 100%; height: 1200px; border: none; border-radius: 16px; background: #f8fafc;"></iframe>
         </div>
 
         <!-- Key Improvements -->
@@ -1458,51 +1427,33 @@
             </div>
         </div>
 
-        <!-- Spending Breakdown Visualization -->
-        <div class="donut-chart-section">
-            <h2 class="section-title">Spending Category Breakdown</h2>
-            <p style="font-size: 16px; color: #666; line-height: 1.6; margin-bottom: 24px;">
-                One of the main additions is visual spending breakdowns. Instead of just listing transactions, users can now see where their money actually goes. Here's an example of a monthly spending breakdown:
+        <!-- Insights Feature Deep Dive -->
+        <div class="problem-section" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 4px solid #0063B0;">
+            <h2 class="section-title" style="color: #0063B0;">📊 Insights Feature - Deep Dive</h2>
+            <p style="font-size: 16px; color: #1e40af; line-height: 1.6; margin-bottom: 32px;">
+                The most requested feature from users was spending insights. Here's a data-rich prototype showing how BMO could help users understand and manage their finances with visual analytics, trend analysis, and actionable alerts.
             </p>
 
-            <div class="donut-container">
-                <div class="donut-wrapper">
-                    <div class="donut-title">January 2026 Spending</div>
-                    <div style="position: relative;">
-                        <div class="donut"></div>
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10;">
-                            <div style="font-size: 24px; font-weight: 700; color: #1a1a1a;">$2,847</div>
-                            <div style="font-size: 14px; color: #666;">Total</div>
-                        </div>
-                    </div>
-                </div>
+            <div style="text-align: center;">
+                <iframe src="insights.html" style="width: 375px; height: 812px; border: 14px solid #1a1a1a; border-radius: 48px; box-shadow: 0 40px 100px rgba(0,0,0,0.3); background: #1a1a1a;"></iframe>
+            </div>
 
-                <div class="donut-legend">
-                    <div class="legend-item">
-                        <div class="legend-color food"></div>
-                        <div class="legend-text">Food & Dining</div>
-                        <div class="legend-amount">$1,025 <span class="legend-percent">(36%)</span></div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color transport"></div>
-                        <div class="legend-text">Transportation</div>
-                        <div class="legend-amount">$684 <span class="legend-percent">(24%)</span></div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color shopping"></div>
-                        <div class="legend-text">Shopping</div>
-                        <div class="legend-amount">$427 <span class="legend-percent">(15%)</span></div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color bills"></div>
-                        <div class="legend-text">Bills & Utilities</div>
-                        <div class="legend-amount">$342 <span class="legend-percent">(12%)</span></div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color other"></div>
-                        <div class="legend-text">Other</div>
-                        <div class="legend-amount">$369 <span class="legend-percent">(13%)</span></div>
-                    </div>
+            <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">🎯 Multiple Chart Types</h3>
+                    <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Donut charts, line graphs, bar charts, and circular progress indicators provide different ways to visualize spending patterns.</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">⚠️ Smart Alerts</h3>
+                    <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Proactive notifications when spending exceeds averages, helping users stay aware before overspending becomes a problem.</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">📈 Trend Analysis</h3>
+                    <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Compare current month against previous months and yearly averages to identify spending patterns over time.</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">💰 Goal Tracking</h3>
+                    <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Visual progress bars and milestone tracking for savings goals with monthly contribution history.</p>
                 </div>
             </div>
         </div>
@@ -1589,5 +1540,115 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.problem-section, .mockup-section');
+            sections.forEach(section => {
+                section.classList.add('animate-on-scroll');
+                observer.observe(section);
+            });
+
+            // Stagger animation for problem cards
+            const cards = document.querySelectorAll('.problem-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `all 0.6s ease ${index * 0.15}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+
+            // Animate numbers with counting effect
+            const animateNumber = (element) => {
+                const target = element.textContent.trim();
+                const duration = 2000;
+                const isTime = target.includes('sec');
+                
+                if (isTime) {
+                    const numMatch = target.match(/[\d.]+/);
+                    if (numMatch) {
+                        const targetNum = parseFloat(numMatch[0]);
+                        let current = 0;
+                        const increment = targetNum / (duration / 16);
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= targetNum) {
+                                element.textContent = target;
+                                clearInterval(timer);
+                            } else {
+                                element.textContent = `~${current.toFixed(1)} sec`;
+                            }
+                        }, 16);
+                    }
+                }
+            };
+
+            // Observe stat numbers for counting animation
+            const statObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateNumber(entry.target);
+                        statObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('[style*="font-size: 48px"]').forEach(stat => {
+                statObserver.observe(stat);
+            });
+
+            // Smooth parallax effect for hero background
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero-section');
+                if (hero && scrolled < hero.offsetHeight) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Add pulse animation to important stats on hover
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.animation = 'pulse 0.6s ease';
+                });
+                card.addEventListener('animationend', () => {
+                    card.style.animation = '';
+                });
+            });
+        });
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

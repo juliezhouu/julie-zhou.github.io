@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMO Banking App - Home & Insights</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #f8fafc;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .title h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .title p {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .comparison-labels {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 32px;
+        }
+
+        .comparison-label {
+            padding: 12px 32px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .comparison-label.before {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .comparison-label.after {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .screen-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .screen-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #0063B0;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        /* Phone Frame */
+        .phone-frame {
+            width: 375px;
+            background: #1a1a1a;
+            border-radius: 48px;
+            padding: 14px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 24px;
+            background: #1a1a1a;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            border-radius: 36px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: #ffffff;
+            height: 812px;
+        }
+
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #ffffff;
+            padding: 14px 20px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #1a1a1a;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* App Header */
+        .app-header {
+            background: linear-gradient(180deg, #0063B0 0%, #0056a0 100%);
+            padding: 16px 20px 24px;
+            color: white;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .bmo-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bmo-text {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .bmo-icon {
+            width: 36px;
+            height: 36px;
+            background: #D32F2F;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .header-greeting {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        /* Insights Header */
+        .insights-header {
+            background: linear-gradient(180deg, #0063B0 0%, #0056a0 100%);
+            padding: 16px 20px 32px;
+            color: white;
+        }
+
+        .insights-welcome {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .insights-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Content */
+        .content {
+            padding: 20px 16px 80px;
+            background: #f5f7fa;
+        }
+
+        /* Account Cards */
+        .account-card {
+            background: linear-gradient(135deg, #0063B0 0%, #004B8D 100%);
+            border-radius: 20px;
+            padding: 24px;
+            color: white;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 16px rgba(0,99,176,0.25);
+        }
+
+        .account-card.secondary {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .account-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .account-label {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-bottom: 2px;
+        }
+
+        .account-number {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .account-balance {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .balance-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        /* Spending Summary - Home Page */
+        .spending-summary-home {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .view-more-btn {
+            background: none;
+            border: none;
+            color: #0063B0;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .spending-amount-large {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .spending-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .spending-alert {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid #ef4444;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        /* Insights Cards */
+        .insights-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .card-menu {
+            font-size: 20px;
+            color: #94a3b8;
+        }
+
+        /* Alert Card */
+        .alert-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+        }
+
+        .alert-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .alert-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .alert-text {
+            font-size: 14px;
+            color: #78716c;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .alert-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .alert-subtext {
+            font-size: 13px;
+            color: #78716c;
+        }
+
+        /* Category Spending Chart */
+        .chart-container {
+            margin-bottom: 20px;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            height: 140px;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .chart-bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chart-bar {
+            width: 100%;
+            background: linear-gradient(180deg, #0063B0 0%, #004B8D 100%);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .chart-bar:hover {
+            background: linear-gradient(180deg, #0077cc 0%, #0063B0 100%);
+        }
+
+        .chart-amount {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 700;
+            color: #1a1a1a;
+            white-space: nowrap;
+        }
+
+        .chart-label {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* Category Percentages */
+        .category-list {
+            margin-top: 20px;
+        }
+
+        .category-item {
+            margin-bottom: 16px;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .category-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .category-amount {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .category-bar {
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .category-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .category-fill.shopping {
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .category-fill.food {
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+        }
+
+        .category-fill.transport {
+            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .category-fill.bills {
+            background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        /* Subscription Summary */
+        .subscription-icons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .subscription-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .subscription-icon.netflix {
+            background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+        }
+
+        .subscription-icon.spotify {
+            background: linear-gradient(135deg, #1DB954 0%, #1aa34a 100%);
+        }
+
+        .subscription-icon.youtube {
+            background: linear-gradient(135deg, #FF0000 0%, #cc0000 100%);
+        }
+
+        .subscription-icon.apple {
+            background: linear-gradient(135deg, #555555 0%, #333333 100%);
+        }
+
+        .subscription-icon.amazon {
+            background: linear-gradient(135deg, #FF9900 0%, #cc7a00 100%);
+        }
+
+        .subscription-icon.more {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .subscription-total {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .subscription-count {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .view-all-link {
+            color: #0063B0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Savings Goal */
+        .savings-goal {
+            margin-bottom: 20px;
+        }
+
+        .goal-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .goal-text {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .goal-progress-bar {
+            height: 12px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .goal-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            border-radius: 6px;
+        }
+
+        .goal-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 12px 0 24px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-icon {
+            font-size: 22px;
+            color: #cbd5e1;
+        }
+
+        .nav-item.active .nav-icon {
+            color: #0063B0;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .nav-item.active .nav-label {
+            color: #0063B0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 968px) {
+            .screens-grid {
+                grid-template-columns: 1fr;
+                gap: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>BMO Banking App - Home Screen Redesign</h1>
+            <p>Transforming the home screen to prioritize what users actually need</p>
+        </div>
+
+        <div class="comparison-labels">
+            <div class="comparison-label before">❌ BEFORE</div>
+            <div class="comparison-label after">✅ AFTER</div>
+        </div>
+
+        <div class="screens-grid">
+            <!-- BEFORE SCREEN -->
+            <div class="screen-column">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>3:22 🌙</span>
+                            <span>📶 📡 14%</span>
+                        </div>
+
+                        <div style="background: #0063B0; padding: 14px 20px 10px; display: flex; justify-content: space-between; color: white; font-size: 15px; font-weight: 600;">
+                            <span>3:22 🌙</span>
+                            <span>📶 📡 14%</span>
+                        </div>
+
+                        <div style="background: #0063B0; padding: 16px 20px 20px; color: white;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div style="font-size: 32px; font-weight: 700;">BMO</div>
+                                    <div style="width: 44px; height: 44px; background: #D32F2F; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">🏔️</div>
+                                </div>
+                                <div style="display: flex; gap: 12px;">
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 20px;">❓</div>
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 20px;">👤</div>
+                                </div>
+                            </div>
+                            <div style="font-size: 20px;">Good afternoon, Julie Jinyi</div>
+                        </div>
+
+                        <div style="background: #f5f5f5; min-height: 500px; padding: 20px; position: relative;">
+                            <div style="width: 4px; height: 100%; background: #10b981; position: absolute; left: 0; top: 0;"></div>
+                            <div style="background: white; padding: 24px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Credit cards</div>
+                                <div style="padding: 16px 0; border-bottom: 1px solid #e5e5e5; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-size: 18px; margin-bottom: 4px;">Mastercard</div>
+                                        <div style="font-size: 16px; color: #666;">8948</div>
+                                    </div>
+                                    <div style="font-size: 22px; margin-right: 8px;">$210.40</div>
+                                    <div style="font-size: 24px; color: #0063B0;">›</div>
+                                </div>
+                                <div style="padding: 16px 0 0; display: flex; justify-content: flex-end; font-size: 18px;">
+                                    <span style="margin-right: 16px;">Total:</span>
+                                    <span style="font-weight: 600;">$210.40 CAD</span>
+                                </div>
+                            </div>
+                            <button style="background: white; border: none; width: 100%; padding: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 16px; color: #0063B0; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="width: 28px; height: 28px; border: 2px solid #0063B0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700;">+</div>
+                                <span>OPEN A BANK ACCOUNT</span>
+                            </button>
+                            <button style="background: white; border: none; width: 100%; padding: 18px; display: flex; align-items: center; gap: 12px; font-size: 16px; color: #0063B0; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="width: 28px; height: 28px; border: 2px solid #0063B0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700;">+</div>
+                                <span>APPLY FOR A CREDIT CARD</span>
+                            </button>
+                        </div>
+
+                        <div style="position: sticky; bottom: 0; background: white; border-top: 1px solid #f1f5f9; display: grid; grid-template-columns: repeat(4, 1fr); padding: 12px 0 24px; z-index: 100;">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                                <div style="font-size: 22px; color: #0063B0;">💳</div>
+                                <div style="font-size: 11px; color: #0063B0; font-weight: 600;">Accounts</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                                <div style="font-size: 22px; color: #cbd5e1;">💵</div>
+                                <div style="font-size: 11px; color: #cbd5e1; font-weight: 500;">Transfer</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                                <div style="font-size: 22px; color: #cbd5e1;">🏛️</div>
+                                <div style="font-size: 11px; color: #cbd5e1; font-weight: 500;">Services</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                                <div style="font-size: 22px; color: #cbd5e1;">📊</div>
+                                <div style="font-size: 11px; color: #cbd5e1; font-weight: 500;">Insights</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AFTER SCREEN -->
+            <div class="screen-column">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>3:22 🌙</span>
+                            <span>📶 📡 14%</span>
+                        </div>
+
+                        <div class="app-header">
+                            <div class="header-top">
+                                <div class="bmo-logo">
+                                    <div class="bmo-text">BMO</div>
+                                    <div class="bmo-icon">🏔️</div>
+                                </div>
+                                <div class="header-actions">
+                                    <div class="action-btn">🔔</div>
+                                    <div class="action-btn">👤</div>
+                                </div>
+                            </div>
+                            <div class="header-greeting">Good afternoon, Julie</div>
+                        </div>
+
+                        <div class="content">
+                            <!-- Account Cards -->
+                            <div class="account-card">
+                                <div class="account-card-header">
+                                    <div>
+                                        <div class="account-label">Checking Account</div>
+                                        <div class="account-number">••• 4827</div>
+                                    </div>
+                                    <div class="action-btn">→</div>
+                                </div>
+                                <div class="account-balance">$3,847.52</div>
+                                <div class="balance-label">Available Balance</div>
+                            </div>
+                            <div class="account-card secondary">
+                                <div class="account-card-header">
+                                    <div>
+                                        <div class="account-label">Mastercard</div>
+                                        <div class="account-number">••• 8948</div>
+                                    </div>
+                                    <div class="action-btn">→</div>
+                                </div>
+                                <div class="account-balance">$210.40</div>
+                                <div class="balance-label">Current Balance</div>
+                            </div>
+
+                            <!-- Spending Summary with View More -->
+                            <div class="spending-summary-home">
+                                <div class="summary-header">
+                                    <div class="summary-title">January Spending</div>
+                                    <button class="view-more-btn">View More →</button>
+                                </div>
+                                <div class="spending-amount-large">$2,847</div>
+                                <div class="spending-subtitle">This month's total</div>
+                                <div class="spending-alert">
+                                    <div>⚠️</div>
+                                    <div>$540 over your average ($2,307)</div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Stats -->
+                            <div class="quick-stats">
+                                <div class="stat-card">
+                                    <div class="stat-label">Top Category</div>
+                                    <div class="stat-value">🍔 $847</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Transactions</div>
+                                    <div class="stat-value">42</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-label">Home</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💳</div>
+                                <div class="nav-label">Accounts</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">💸</div>
+                                <div class="nav-label">Transfer</div>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">Insights</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
